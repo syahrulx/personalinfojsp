@@ -16,205 +16,430 @@
 
             body {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: #f3f4f6;
                 min-height: 100vh;
                 padding: 40px 20px;
             }
 
             .container {
-                max-width: 700px;
+                max-width: 1000px;
                 margin: 0 auto;
-                animation: fadeIn 0.6s ease-out;
             }
 
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
 
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
+            @media (max-width: 768px) {
+                .grid {
+                    grid-template-columns: 1fr;
                 }
+            }
+
+            .card {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                padding: 30px;
+                border: 1px solid #e5e7eb;
             }
 
             .profile-card {
-                background: white;
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                overflow: hidden;
-            }
-
-            .profile-header {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 40px;
                 text-align: center;
-                color: white;
             }
 
-            .profile-avatar {
-                width: 100px;
-                height: 100px;
-                background: white;
+            .avatar {
+                width: 120px;
+                height: 120px;
+                background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
                 border-radius: 50%;
                 margin: 0 auto 20px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 40px;
+                font-size: 48px;
                 font-weight: 700;
-                color: #667eea;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                color: white;
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
             }
 
             .profile-name {
-                font-size: 32px;
+                font-size: 24px;
                 font-weight: 700;
+                color: #111827;
                 margin-bottom: 5px;
             }
 
-            .profile-id {
-                font-size: 16px;
-                opacity: 0.9;
-            }
-
-            .profile-body {
-                padding: 40px;
-            }
-
-            .info-section {
-                margin-bottom: 30px;
-                animation: slideUp 0.5s ease-out;
-                animation-fill-mode: both;
-            }
-
-            .info-section:nth-child(1) {
-                animation-delay: 0.1s;
-            }
-
-            .info-section:nth-child(2) {
-                animation-delay: 0.2s;
-            }
-
-            .info-section:nth-child(3) {
-                animation-delay: 0.3s;
-            }
-
-            .info-section:nth-child(4) {
-                animation-delay: 0.4s;
-            }
-
-            @keyframes slideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .info-label {
-                font-size: 12px;
-                font-weight: 600;
-                color: #667eea;
-                text-transform: uppercase;
-                letter-spacing: 1px;
+            .profile-title {
+                font-size: 14px;
+                color: #6b7280;
                 margin-bottom: 8px;
             }
 
-            .info-value {
-                font-size: 16px;
-                color: #2d3748;
-                line-height: 1.6;
-                padding: 15px;
-                background: #f7fafc;
-                border-radius: 10px;
-                border-left: 4px solid #667eea;
+            .profile-location {
+                font-size: 13px;
+                color: #9ca3af;
+                margin-bottom: 20px;
             }
 
-            .back-btn {
-                display: inline-block;
-                padding: 12px 30px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                text-decoration: none;
-                border-radius: 10px;
+            .action-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+
+            .btn {
+                padding: 10px 24px;
+                border-radius: 6px;
+                font-size: 14px;
                 font-weight: 600;
-                transition: all 0.3s ease;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .btn-primary {
+                background: #3b82f6;
+                color: white;
+                border: none;
+            }
+
+            .btn-primary:hover {
+                background: #2563eb;
+            }
+
+            .btn-secondary {
+                background: white;
+                color: #374151;
+                border: 1px solid #d1d5db;
+            }
+
+            .btn-secondary:hover {
+                background: #f9fafb;
+            }
+
+            .social-links {
+                border-top: 1px solid #e5e7eb;
+                padding-top: 20px;
+            }
+
+            .social-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 0;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .social-item:last-child {
+                border-bottom: none;
+            }
+
+            .social-label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #374151;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .social-icon {
+                width: 20px;
+                height: 20px;
+                color: #6b7280;
+            }
+
+            .social-value {
+                color: #6b7280;
+                font-size: 14px;
+            }
+
+            .info-card {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .info-row {
+                display: flex;
+                padding-bottom: 16px;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .info-row:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .info-label {
+                font-size: 14px;
+                font-weight: 600;
+                color: #374151;
+                min-width: 120px;
+            }
+
+            .info-value {
+                font-size: 14px;
+                color: #6b7280;
+                flex: 1;
+            }
+
+            .edit-btn {
+                background: #06b6d4;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                margin-bottom: 20px;
+            }
+
+            .edit-btn:hover {
+                background: #0891b2;
+            }
+
+            .projects-section {
                 margin-top: 20px;
             }
 
-            .back-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-            }
-
-            .success-badge {
-                display: inline-block;
-                background: #48bb78;
-                color: white;
-                padding: 8px 16px;
-                border-radius: 20px;
+            .section-title {
                 font-size: 14px;
                 font-weight: 600;
-                margin-bottom: 20px;
+                color: #6b7280;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            @media (max-width: 768px) {
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .project-card {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                border: 1px solid #e5e7eb;
+            }
+
+            .project-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #6b7280;
+                margin-bottom: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .progress-item {
+                margin-bottom: 12px;
+            }
+
+            .progress-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .progress-label {
+                font-size: 13px;
+                color: #374151;
+                margin-bottom: 6px;
+            }
+
+            .progress-bar {
+                height: 8px;
+                background: #e5e7eb;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: #3b82f6;
+                border-radius: 4px;
+                transition: width 1s ease-out;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #3b82f6;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                margin-top: 20px;
+            }
+
+            .back-link:hover {
+                color: #2563eb;
+            }
+
+            .intro-section {
+                background: #f9fafb;
+                padding: 16px;
+                border-radius: 8px;
+                margin-top: 20px;
+            }
+
+            .intro-text {
+                font-size: 14px;
+                color: #4b5563;
+                line-height: 1.6;
             }
         </style>
     </head>
 
     <body>
         <div class="container">
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="profile-avatar">
+            <div class="grid">
+                <!-- Left Column - Profile Card -->
+                <div class="card profile-card">
+                    <div class="avatar">
                         <%= request.getAttribute("name").toString().substring(0, 1).toUpperCase() %>
                     </div>
                     <div class="profile-name">
                         <%= request.getAttribute("name") %>
                     </div>
-                    <div class="profile-id">
-                        <%= request.getAttribute("studentId") %>
+                    <div class="profile-title">
+                        <%= request.getAttribute("program") %>
+                    </div>
+                    <div class="profile-location">Student ID: <%= request.getAttribute("studentId") %>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Follow</button>
+                        <button class="btn btn-secondary">Message</button>
+                    </div>
+
+                    <div class="social-links">
+                        <div class="social-item">
+                            <div class="social-label">
+                                <span class="social-icon">📧</span>
+                                Email
+                            </div>
+                            <div class="social-value">
+                                <%= request.getAttribute("email") %>
+                            </div>
+                        </div>
+                        <div class="social-item">
+                            <div class="social-label">
+                                <span class="social-icon">🎯</span>
+                                Hobbies
+                            </div>
+                            <div class="social-value">
+                                <%= request.getAttribute("hobbies") %>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="profile-body">
-                    <div class="success-badge">✓ Profile Created Successfully</div>
+                <!-- Right Column - Info Card -->
+                <div class="card info-card">
+                    <button class="edit-btn">Edit</button>
 
-                    <div class="info-section">
+                    <div class="info-row">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">
+                            <%= request.getAttribute("name") %>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">
+                            <%= request.getAttribute("email") %>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Student ID</div>
+                        <div class="info-value">
+                            <%= request.getAttribute("studentId") %>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
                         <div class="info-label">Program</div>
                         <div class="info-value">
                             <%= request.getAttribute("program") %>
                         </div>
                     </div>
 
-                    <div class="info-section">
-                        <div class="info-label">Email Address</div>
-                        <div class="info-value">
-                            <%= request.getAttribute("email") %>
-                        </div>
-                    </div>
-
-                    <div class="info-section">
-                        <div class="info-label">Hobbies</div>
-                        <div class="info-value">
-                            <%= request.getAttribute("hobbies") %>
-                        </div>
-                    </div>
-
-                    <div class="info-section">
-                        <div class="info-label">About Me</div>
-                        <div class="info-value">
+                    <div class="intro-section">
+                        <div class="section-title">About Me</div>
+                        <div class="intro-text">
                             <%= request.getAttribute("introduction") %>
                         </div>
                     </div>
-
-                    <a href="index.jsp" class="back-btn">← Create Another Profile</a>
                 </div>
             </div>
+
+            <!-- Projects Section -->
+            <div class="projects-section">
+                <div class="section-title">Skills & Interests</div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Academic Progress</div>
+                        <div class="progress-item">
+                            <div class="progress-label">Core Subjects</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Electives</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Projects</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Skill Development</div>
+                        <div class="progress-item">
+                            <div class="progress-label">Web Development</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Problem Solving</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Teamwork</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.jsp" class="back-link">← Back to Form</a>
         </div>
     </body>
 
