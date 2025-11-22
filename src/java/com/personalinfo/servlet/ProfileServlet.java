@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ProfileServlet", urlPatterns = {"/ProfileServlet"})
+@WebServlet(name = "ProfileServlet", urlPatterns = { "/ProfileServlet" })
 public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // Set character encoding to handle special characters
         request.setCharacterEncoding("UTF-8");
-        
+
         // Retrieve form data
         String name = request.getParameter("name");
         String studentId = request.getParameter("studentId");
@@ -24,7 +24,15 @@ public class ProfileServlet extends HttpServlet {
         String email = request.getParameter("email");
         String hobbies = request.getParameter("hobbies");
         String introduction = request.getParameter("introduction");
-        
+
+        // Retrieve skill data
+        String coreSubjects = request.getParameter("coreSubjects");
+        String electives = request.getParameter("electives");
+        String projects = request.getParameter("projects");
+        String webDevelopment = request.getParameter("webDevelopment");
+        String problemSolving = request.getParameter("problemSolving");
+        String teamwork = request.getParameter("teamwork");
+
         // Set attributes to forward to JSP
         request.setAttribute("name", name);
         request.setAttribute("studentId", studentId);
@@ -32,7 +40,15 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("email", email);
         request.setAttribute("hobbies", hobbies);
         request.setAttribute("introduction", introduction);
-        
+
+        // Set skill attributes
+        request.setAttribute("coreSubjects", coreSubjects);
+        request.setAttribute("electives", electives);
+        request.setAttribute("projects", projects);
+        request.setAttribute("webDevelopment", webDevelopment);
+        request.setAttribute("problemSolving", problemSolving);
+        request.setAttribute("teamwork", teamwork);
+
         // Forward to profile display page
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
     }
