@@ -106,58 +106,39 @@
                 min-height: 100px;
             }
 
-            /* Skill Item Styles */
-            .skill-item {
+            /* Skill Builder */
+            .skill-builder {
                 background: #f9fafb;
-                padding: 16px;
+                padding: 20px;
                 border-radius: 8px;
-                margin-bottom: 12px;
                 border: 1px solid #e5e7eb;
-                position: relative;
+                margin-bottom: 20px;
             }
 
-            .skill-header {
-                display: flex;
-                gap: 10px;
-                margin-bottom: 12px;
-            }
-
-            .skill-name-input {
-                flex: 1;
-            }
-
-            .remove-skill-btn {
-                background: #ef4444;
-                color: white;
-                border: none;
-                padding: 8px 12px;
-                border-radius: 6px;
-                font-size: 12px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-
-            .remove-skill-btn:hover {
-                background: #dc2626;
+            .skill-input-group {
+                margin-bottom: 16px;
             }
 
             .slider-container {
-                display: flex;
-                align-items: center;
-                gap: 12px;
+                margin-bottom: 16px;
             }
 
-            .slider-wrapper {
-                flex: 1;
+            .slider-label {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+            }
+
+            .slider-text {
+                font-size: 14px;
+                color: #374151;
+                font-weight: 500;
             }
 
             .slider-value {
                 color: #3b82f6;
                 font-size: 14px;
                 font-weight: 600;
-                min-width: 45px;
-                text-align: right;
             }
 
             input[type="range"] {
@@ -197,7 +178,7 @@
                 box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
             }
 
-            .add-skill-btn {
+            .save-skill-btn {
                 width: 100%;
                 padding: 10px;
                 background: #10b981;
@@ -208,18 +189,91 @@
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                margin-bottom: 12px;
             }
 
-            .add-skill-btn:hover {
+            .save-skill-btn:hover {
                 background: #059669;
             }
 
-            .empty-state {
-                text-align: center;
-                padding: 30px;
-                color: #9ca3af;
+            /* Skills List */
+            .skills-list {
+                margin-top: 20px;
+            }
+
+            .skills-list-title {
                 font-size: 14px;
+                font-weight: 600;
+                color: #374151;
+                margin-bottom: 12px;
+            }
+
+            .skill-item {
+                background: white;
+                padding: 12px;
+                border-radius: 6px;
+                margin-bottom: 8px;
+                border: 1px solid #e5e7eb;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .skill-info {
+                flex: 1;
+            }
+
+            .skill-name {
+                font-size: 14px;
+                font-weight: 600;
+                color: #111827;
+                margin-bottom: 4px;
+            }
+
+            .skill-progress {
+                height: 6px;
+                background: #e5e7eb;
+                border-radius: 3px;
+                overflow: hidden;
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .skill-progress-fill {
+                height: 100%;
+                background: #3b82f6;
+                border-radius: 3px;
+            }
+
+            .skill-level-text {
+                font-size: 12px;
+                color: #6b7280;
+                margin-left: 8px;
+            }
+
+            .remove-skill-btn {
+                background: #ef4444;
+                color: white;
+                border: none;
+                padding: 6px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: 600;
+                cursor: pointer;
+                margin-left: 12px;
+            }
+
+            .remove-skill-btn:hover {
+                background: #dc2626;
+            }
+
+            .empty-skills {
+                text-align: center;
+                padding: 20px;
+                color: #9ca3af;
+                font-size: 13px;
+                background: white;
+                border-radius: 6px;
+                border: 2px dashed #e5e7eb;
             }
 
             .submit-btn {
@@ -294,77 +348,135 @@
                     <div>
                         <div class="section-title">Skills & Interests</div>
 
-                        <button type="button" class="add-skill-btn" onclick="addSkill()">+ Add Skill</button>
+                        <!-- Skill Builder -->
+                        <div class="skill-builder">
+                            <div class="skill-input-group">
+                                <label for="skillNameInput">Skill Name</label>
+                                <input type="text" id="skillNameInput" placeholder="e.g., Web Development">
+                            </div>
 
-                        <div id="skillsContainer">
-                            <div class="empty-state" id="emptyState">
-                                No skills added yet. Click "Add Skill" to get started!
+                            <div class="slider-container">
+                                <div class="slider-label">
+                                    <span class="slider-text">Proficiency Level</span>
+                                    <span class="slider-value" id="currentSliderValue">50%</span>
+                                </div>
+                                <input type="range" id="skillLevelSlider" min="0" max="100" value="50">
+                            </div>
+
+                            <button type="button" class="save-skill-btn" onclick="saveSkill()">💾 Save Skill</button>
+                        </div>
+
+                        <!-- Skills List -->
+                        <div class="skills-list">
+                            <div class="skills-list-title">Your Skills (<span id="skillCount">0</span>)</div>
+                            <div id="skillsList">
+                                <div class="empty-skills">No skills added yet</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <button type="submit" class="submit-btn">Submit Profile</button>
+
+                <!-- Hidden inputs for skills -->
+                <div id="hiddenSkillsContainer"></div>
             </form>
         </div>
 
         <script>
-            let skillCount = 0;
+            const skills = [];
+            const slider = document.getElementById('skillLevelSlider');
+            const sliderValueDisplay = document.getElementById('currentSliderValue');
 
-            function addSkill() {
-                skillCount++;
-                const container = document.getElementById('skillsContainer');
-                const emptyState = document.getElementById('emptyState');
+            // Update slider value display
+            slider.addEventListener('input', function () {
+                sliderValueDisplay.textContent = this.value + '%';
+            });
 
-                // Hide empty state
-                if (emptyState) {
-                    emptyState.style.display = 'none';
+            function saveSkill() {
+                const nameInput = document.getElementById('skillNameInput');
+                const levelSlider = document.getElementById('skillLevelSlider');
+
+                const skillName = nameInput.value.trim();
+                const skillLevel = levelSlider.value;
+
+                if (!skillName) {
+                    alert('Please enter a skill name');
+                    return;
                 }
 
-                // Create skill item
-                const skillItem = document.createElement('div');
-                skillItem.className = 'skill-item';
-                skillItem.id = 'skill-' + skillCount;
+                // Add to skills array
+                skills.push({
+                    name: skillName,
+                    level: skillLevel
+                });
 
-                skillItem.innerHTML = `
-                    <div class="skill-header">
-                        <input type="text" 
-                               class="skill-name-input" 
-                               name="skillName[]" 
-                               placeholder="Skill name (e.g., Web Development)" 
-                               required>
-                        <button type="button" class="remove-skill-btn" onclick="removeSkill(${skillCount})">Remove</button>
-                    </div>
-                    <div class="slider-container">
-                        <div class="slider-wrapper">
-                            <input type="range" 
-                                   name="skillLevel[]" 
-                                   min="0" 
-                                   max="100" 
-                                   value="50" 
-                                   oninput="updateSliderValue(${skillCount}, this.value)">
+                // Clear inputs
+                nameInput.value = '';
+                levelSlider.value = 50;
+                sliderValueDisplay.textContent = '50%';
+
+                // Update display
+                updateSkillsList();
+                updateHiddenInputs();
+            }
+
+            function removeSkill(index) {
+                skills.splice(index, 1);
+                updateSkillsList();
+                updateHiddenInputs();
+            }
+
+            function updateSkillsList() {
+                const skillsList = document.getElementById('skillsList');
+                const skillCount = document.getElementById('skillCount');
+
+                skillCount.textContent = skills.length;
+
+                if (skills.length === 0) {
+                    skillsList.innerHTML = '<div class="empty-skills">No skills added yet</div>';
+                    return;
+                }
+
+                let html = '';
+                skills.forEach((skill, index) => {
+                    html += `
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <div class="skill-name">${skill.name}</div>
+                                <div style="display: flex; align-items: center;">
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-fill" style="width: ${skill.level}%"></div>
+                                    </div>
+                                    <span class="skill-level-text">${skill.level}%</span>
+                                </div>
+                            </div>
+                            <button type="button" class="remove-skill-btn" onclick="removeSkill(${index})">Remove</button>
                         </div>
-                        <span class="slider-value" id="value-${skillCount}">50%</span>
-                    </div>
-                `;
+                    `;
+                });
 
-                container.appendChild(skillItem);
+                skillsList.innerHTML = html;
             }
 
-            function removeSkill(id) {
-                const skillItem = document.getElementById('skill-' + id);
-                skillItem.remove();
+            function updateHiddenInputs() {
+                const container = document.getElementById('hiddenSkillsContainer');
+                container.innerHTML = '';
 
-                // Show empty state if no skills
-                const container = document.getElementById('skillsContainer');
-                const emptyState = document.getElementById('emptyState');
-                if (container.children.length === 1) { // Only empty state left
-                    emptyState.style.display = 'block';
-                }
-            }
+                skills.forEach((skill, index) => {
+                    const nameInput = document.createElement('input');
+                    nameInput.type = 'hidden';
+                    nameInput.name = 'skillName[]';
+                    nameInput.value = skill.name;
 
-            function updateSliderValue(id, value) {
-                document.getElementById('value-' + id).textContent = value + '%';
+                    const levelInput = document.createElement('input');
+                    levelInput.type = 'hidden';
+                    levelInput.name = 'skillLevel[]';
+                    levelInput.value = skill.level;
+
+                    container.appendChild(nameInput);
+                    container.appendChild(levelInput);
+                });
             }
         </script>
     </body>
