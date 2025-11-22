@@ -25,13 +25,9 @@ public class ProfileServlet extends HttpServlet {
         String hobbies = request.getParameter("hobbies");
         String introduction = request.getParameter("introduction");
 
-        // Retrieve skill data
-        String coreSubjects = request.getParameter("coreSubjects");
-        String electives = request.getParameter("electives");
-        String projects = request.getParameter("projects");
-        String webDevelopment = request.getParameter("webDevelopment");
-        String problemSolving = request.getParameter("problemSolving");
-        String teamwork = request.getParameter("teamwork");
+        // Retrieve dynamic skill data (arrays)
+        String[] skillNames = request.getParameterValues("skillName[]");
+        String[] skillLevels = request.getParameterValues("skillLevel[]");
 
         // Set attributes to forward to JSP
         request.setAttribute("name", name);
@@ -42,12 +38,8 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("introduction", introduction);
 
         // Set skill attributes
-        request.setAttribute("coreSubjects", coreSubjects);
-        request.setAttribute("electives", electives);
-        request.setAttribute("projects", projects);
-        request.setAttribute("webDevelopment", webDevelopment);
-        request.setAttribute("problemSolving", problemSolving);
-        request.setAttribute("teamwork", teamwork);
+        request.setAttribute("skillNames", skillNames);
+        request.setAttribute("skillLevels", skillLevels);
 
         // Forward to profile display page
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
