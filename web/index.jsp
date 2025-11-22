@@ -440,20 +440,18 @@
 
                 let html = '';
                 skills.forEach((skill, index) => {
-                    html += `
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <div class="skill-name">${skill.name}</div>
-                                <div style="display: flex; align-items: center;">
-                                    <div class="skill-progress">
-                                        <div class="skill-progress-fill" style="width: ${skill.level}%"></div>
-                                    </div>
-                                    <span class="skill-level-text">${skill.level}%</span>
-                                </div>
-                            </div>
-                            <button type="button" class="remove-skill-btn" onclick="removeSkill(${index})">Remove</button>
-                        </div>
-                    `;
+                    html += '<div class="skill-item">' +
+                        '<div class="skill-info">' +
+                        '<div class="skill-name">' + skill.name + '</div>' +
+                        '<div style="display: flex; align-items: center;">' +
+                        '<div class="skill-progress">' +
+                        '<div class="skill-progress-fill" style="width: ' + skill.level + '%"></div>' +
+                        '</div>' +
+                        '<span class="skill-level-text">' + skill.level + '%</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '<button type="button" class="remove-skill-btn" onclick="removeSkill(' + index + ')">Remove</button>' +
+                        '</div>';
                 });
 
                 skillsList.innerHTML = html;
