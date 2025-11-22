@@ -21,12 +21,11 @@ This app lets you fill out a form with your personal information, add your skill
 - JSP (JavaServer Pages)
 - HTML/CSS
 - JavaScript
-- NetBeans IDE
 
 ## How to run
 
 1. Open the project in NetBeans
-2. Make sure you have a Java EE server configured (like Apache Tomcat)
+2. Make sure you have a Java EE server configured 
 3. Right-click the project and select "Run"
 4. Your browser should open to the form page
 
@@ -63,5 +62,6 @@ personalinfo/
 - All data is passed through the servlet to the display page
 
 ## Author
+Muhammad Syahrul Izwan bin Ahmad Bazlan
 
-Built as a learning project for Java web development.
+Built as a learning project for Java web development also as a individual project for CSC584.
