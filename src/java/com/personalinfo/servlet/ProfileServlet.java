@@ -17,7 +17,7 @@ public class ProfileServlet extends HttpServlet {
         // Set character encoding to handle special characters
         request.setCharacterEncoding("UTF-8");
 
-        // Retrieve form data
+        // Retrieve personal information
         String name = request.getParameter("name");
         String studentId = request.getParameter("studentId");
         String program = request.getParameter("program");
@@ -25,11 +25,15 @@ public class ProfileServlet extends HttpServlet {
         String hobbies = request.getParameter("hobbies");
         String introduction = request.getParameter("introduction");
 
-        // Retrieve dynamic skill data (arrays)
+        // Retrieve skills data (arrays)
         String[] skillNames = request.getParameterValues("skillName[]");
         String[] skillLevels = request.getParameterValues("skillLevel[]");
 
-        // Set attributes to forward to JSP
+        // Retrieve interests data (arrays)
+        String[] interestNames = request.getParameterValues("interestName[]");
+        String[] interestLevels = request.getParameterValues("interestLevel[]");
+
+        // Set personal info attributes
         request.setAttribute("name", name);
         request.setAttribute("studentId", studentId);
         request.setAttribute("program", program);
@@ -37,9 +41,13 @@ public class ProfileServlet extends HttpServlet {
         request.setAttribute("hobbies", hobbies);
         request.setAttribute("introduction", introduction);
 
-        // Set skill attributes
+        // Set skills attributes
         request.setAttribute("skillNames", skillNames);
         request.setAttribute("skillLevels", skillLevels);
+
+        // Set interests attributes
+        request.setAttribute("interestNames", interestNames);
+        request.setAttribute("interestLevels", interestLevels);
 
         // Forward to profile display page
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
