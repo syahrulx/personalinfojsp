@@ -210,13 +210,34 @@
                 margin-top: 20px;
             }
 
+            .skills-interests-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-top: 20px;
+            }
+
+            @media (max-width: 768px) {
+                .skills-interests-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .section-container {
+                background: white;
+                padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #e5e7eb;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
             .section-title {
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 600;
-                color: #6b7280;
+                color: #111827;
                 margin-bottom: 15px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #e5e7eb;
             }
 
             .skills-grid {
@@ -383,64 +404,70 @@
                 </div>
             </div>
 
-            <!-- Skills & Interests Section -->
-            <div class="skills-section">
-                <div class="section-title">💼 Skills</div>
+            <!-- Skills & Interests Horizontal Layout -->
+            <div class="skills-interests-grid">
+                <!-- Skills Section -->
+                <div class="section-container">
+                    <div class="section-title">💼 Skills</div>
 
-                <% String[] skillNames=(String[]) request.getAttribute("skillNames"); String[] skillLevels=(String[])
-                    request.getAttribute("skillLevels"); if (skillNames !=null && skillNames.length> 0) {
-                    %>
-                    <div class="skills-grid">
-                        <% for (int i=0; i < skillNames.length; i++) { %>
-                            <div class="skill-card">
-                                <div class="skill-name">
-                                    <%= skillNames[i] %>
+                    <% String[] skillNames=(String[]) request.getAttribute("skillNames"); String[]
+                        skillLevels=(String[]) request.getAttribute("skillLevels"); if (skillNames !=null &&
+                        skillNames.length> 0) {
+                        %>
+                        <div class="skills-grid">
+                            <% for (int i=0; i < skillNames.length; i++) { %>
+                                <div class="skill-card">
+                                    <div class="skill-name">
+                                        <%= skillNames[i] %>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: <%= skillLevels[i] %>%"></div>
+                                    </div>
+                                    <div class="skill-percentage">
+                                        <%= skillLevels[i] %>%
+                                    </div>
                                 </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: <%= skillLevels[i] %>%"></div>
-                                </div>
-                                <div class="skill-percentage">
-                                    <%= skillLevels[i] %>%
-                                </div>
+                                <% } %>
+                        </div>
+                        <% } else { %>
+                            <div class="empty-skills">
+                                <p>No skills added</p>
                             </div>
                             <% } %>
-                    </div>
-                    <% } else { %>
-                        <div class="empty-skills">
-                            <p>No skills added</p>
+                </div>
+
+                <!-- Interests Section -->
+                <div class="section-container">
+                    <div class="section-title">⭐ Interests</div>
+
+                    <% String[] interestNames=(String[]) request.getAttribute("interestNames"); String[]
+                        interestLevels=(String[]) request.getAttribute("interestLevels"); if (interestNames !=null &&
+                        interestNames.length> 0) {
+                        %>
+                        <div class="skills-grid">
+                            <% for (int i=0; i < interestNames.length; i++) { %>
+                                <div class="skill-card">
+                                    <div class="skill-name">
+                                        <%= interestNames[i] %>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: <%= interestLevels[i] %>%"></div>
+                                    </div>
+                                    <div class="skill-percentage">
+                                        <%= interestLevels[i] %>%
+                                    </div>
+                                </div>
+                                <% } %>
                         </div>
-                        <% } %>
+                        <% } else { %>
+                            <div class="empty-skills">
+                                <p>No interests added</p>
+                            </div>
+                            <% } %>
+                </div>
             </div>
 
-            <!-- Interests Section -->
-            <div class="skills-section" style="margin-top: 20px;">
-                <div class="section-title">⭐ Interests</div>
-
-                <% String[] interestNames=(String[]) request.getAttribute("interestNames"); String[]
-                    interestLevels=(String[]) request.getAttribute("interestLevels"); if (interestNames !=null &&
-                    interestNames.length> 0) {
-                    %>
-                    <div class="skills-grid">
-                        <% for (int i=0; i < interestNames.length; i++) { %>
-                            <div class="skill-card">
-                                <div class="skill-name">
-                                    <%= interestNames[i] %>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: <%= interestLevels[i] %>%"></div>
-                                </div>
-                                <div class="skill-percentage">
-                                    <%= interestLevels[i] %>%
-                                </div>
-                            </div>
-                            <% } %>
-                    </div>
-                    <% } else { %>
-                        <div class="empty-skills">
-                            <p>No interests added</p>
-                        </div>
-                        <% } %>
-            </div><a href="index.jsp" class="back-link">← Back to Form</a>
+            <a href="index.jsp" class="back-link">← Back to Form</a>
         </div>
     </body>
 
