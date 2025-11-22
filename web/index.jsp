@@ -106,22 +106,50 @@
                 min-height: 100px;
             }
 
-            /* Slider Styles */
-            .slider-group {
-                margin-bottom: 24px;
+            /* Skill Item Styles */
+            .skill-item {
+                background: #f9fafb;
+                padding: 16px;
+                border-radius: 8px;
+                margin-bottom: 12px;
+                border: 1px solid #e5e7eb;
+                position: relative;
             }
 
-            .slider-label {
+            .skill-header {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 10px;
+                gap: 10px;
+                margin-bottom: 12px;
             }
 
-            .slider-name {
-                color: #374151;
-                font-size: 14px;
-                font-weight: 500;
+            .skill-name-input {
+                flex: 1;
+            }
+
+            .remove-skill-btn {
+                background: #ef4444;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .remove-skill-btn:hover {
+                background: #dc2626;
+            }
+
+            .slider-container {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .slider-wrapper {
+                flex: 1;
             }
 
             .slider-value {
@@ -139,6 +167,7 @@
                 background: #e5e7eb;
                 outline: none;
                 -webkit-appearance: none;
+                appearance: none;
             }
 
             input[type="range"]::-webkit-slider-thumb {
@@ -166,6 +195,31 @@
                 cursor: pointer;
                 border: none;
                 box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+            }
+
+            .add-skill-btn {
+                width: 100%;
+                padding: 10px;
+                background: #10b981;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                margin-bottom: 12px;
+            }
+
+            .add-skill-btn:hover {
+                background: #059669;
+            }
+
+            .empty-state {
+                text-align: center;
+                padding: 30px;
+                color: #9ca3af;
+                font-size: 14px;
             }
 
             .submit-btn {
@@ -197,7 +251,7 @@
             <h1>Personal Profile</h1>
             <p class="subtitle">Share your information and skills with us</p>
 
-            <form action="ProfileServlet" method="POST">
+            <form action="ProfileServlet" method="POST" id="profileForm">
                 <div class="form-grid">
                     <!-- Left Column - Personal Information -->
                     <div>
@@ -240,66 +294,12 @@
                     <div>
                         <div class="section-title">Skills & Interests</div>
 
-                        <p style="color: #6b7280; font-size: 13px; margin-bottom: 20px;">
-                            Drag the sliders to rate your proficiency level
-                        </p>
+                        <button type="button" class="add-skill-btn" onclick="addSkill()">+ Add Skill</button>
 
-                        <!-- Academic Skills -->
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Core Subjects</span>
-                                <span class="slider-value" id="coreValue">50%</span>
+                        <div id="skillsContainer">
+                            <div class="empty-state" id="emptyState">
+                                No skills added yet. Click "Add Skill" to get started!
                             </div>
-                            <input type="range" name="coreSubjects" id="coreSubjects" min="0" max="100" value="50"
-                                oninput="document.getElementById('coreValue').textContent = this.value + '%'">
-                        </div>
-
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Electives</span>
-                                <span class="slider-value" id="electivesValue">50%</span>
-                            </div>
-                            <input type="range" name="electives" id="electives" min="0" max="100" value="50"
-                                oninput="document.getElementById('electivesValue').textContent = this.value + '%'">
-                        </div>
-
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Projects</span>
-                                <span class="slider-value" id="projectsValue">50%</span>
-                            </div>
-                            <input type="range" name="projects" id="projects" min="0" max="100" value="50"
-                                oninput="document.getElementById('projectsValue').textContent = this.value + '%'">
-                        </div>
-
-                        <div style="height: 20px;"></div>
-
-                        <!-- Technical Skills -->
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Web Development</span>
-                                <span class="slider-value" id="webDevValue">50%</span>
-                            </div>
-                            <input type="range" name="webDevelopment" id="webDevelopment" min="0" max="100" value="50"
-                                oninput="document.getElementById('webDevValue').textContent = this.value + '%'">
-                        </div>
-
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Problem Solving</span>
-                                <span class="slider-value" id="problemValue">50%</span>
-                            </div>
-                            <input type="range" name="problemSolving" id="problemSolving" min="0" max="100" value="50"
-                                oninput="document.getElementById('problemValue').textContent = this.value + '%'">
-                        </div>
-
-                        <div class="slider-group">
-                            <div class="slider-label">
-                                <span class="slider-name">Teamwork</span>
-                                <span class="slider-value" id="teamworkValue">50%</span>
-                            </div>
-                            <input type="range" name="teamwork" id="teamwork" min="0" max="100" value="50"
-                                oninput="document.getElementById('teamworkValue').textContent = this.value + '%'">
                         </div>
                     </div>
                 </div>
@@ -307,6 +307,66 @@
                 <button type="submit" class="submit-btn">Submit Profile</button>
             </form>
         </div>
+
+        <script>
+            let skillCount = 0;
+
+            function addSkill() {
+                skillCount++;
+                const container = document.getElementById('skillsContainer');
+                const emptyState = document.getElementById('emptyState');
+
+                // Hide empty state
+                if (emptyState) {
+                    emptyState.style.display = 'none';
+                }
+
+                // Create skill item
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.id = 'skill-' + skillCount;
+
+                skillItem.innerHTML = `
+                    <div class="skill-header">
+                        <input type="text" 
+                               class="skill-name-input" 
+                               name="skillName[]" 
+                               placeholder="Skill name (e.g., Web Development)" 
+                               required>
+                        <button type="button" class="remove-skill-btn" onclick="removeSkill(${skillCount})">Remove</button>
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <input type="range" 
+                                   name="skillLevel[]" 
+                                   min="0" 
+                                   max="100" 
+                                   value="50" 
+                                   oninput="updateSliderValue(${skillCount}, this.value)">
+                        </div>
+                        <span class="slider-value" id="value-${skillCount}">50%</span>
+                    </div>
+                `;
+
+                container.appendChild(skillItem);
+            }
+
+            function removeSkill(id) {
+                const skillItem = document.getElementById('skill-' + id);
+                skillItem.remove();
+
+                // Show empty state if no skills
+                const container = document.getElementById('skillsContainer');
+                const emptyState = document.getElementById('emptyState');
+                if (container.children.length === 1) { // Only empty state left
+                    emptyState.style.display = 'block';
+                }
+            }
+
+            function updateSliderValue(id, value) {
+                document.getElementById('value-' + id).textContent = value + '%';
+            }
+        </script>
     </body>
 
     </html>
