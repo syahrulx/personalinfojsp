@@ -336,11 +336,6 @@
                     <div class="profile-location">Student ID: <%= request.getAttribute("studentId") %>
                     </div>
 
-                    <div class="action-buttons">
-                        <button class="btn btn-primary">Follow</button>
-                        <button class="btn btn-secondary">Message</button>
-                    </div>
-
                     <div class="social-links">
                         <div class="social-item">
                             <div class="social-label">
@@ -365,8 +360,6 @@
 
                 <!-- Right Column - Info Card -->
                 <div class="card info-card">
-                    <button class="edit-btn">Edit</button>
-
                     <div class="info-row">
                         <div class="info-label">Full Name</div>
                         <div class="info-value">
