@@ -398,19 +398,22 @@
                         <div class="progress-item">
                             <div class="progress-label">Core Subjects</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 85%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" coreSubjects") %>%">
+                                </div>
                             </div>
                         </div>
                         <div class="progress-item">
                             <div class="progress-label">Electives</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 70%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" electives") %>%">
+                                </div>
                             </div>
                         </div>
                         <div class="progress-item">
                             <div class="progress-label">Projects</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 90%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" projects") %>%">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -420,19 +423,22 @@
                         <div class="progress-item">
                             <div class="progress-label">Web Development</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 80%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" webDevelopment") %>
+                                    %"></div>
                             </div>
                         </div>
                         <div class="progress-item">
                             <div class="progress-label">Problem Solving</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" problemSolving") %>
+                                    %"></div>
                             </div>
                         </div>
                         <div class="progress-item">
                             <div class="progress-label">Teamwork</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 95%"></div>
+                                <div class="progress-fill" style="width: <%= request.getAttribute(" teamwork") %>%">
+                                </div>
                             </div>
                         </div>
                     </div>
