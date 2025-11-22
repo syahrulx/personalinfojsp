@@ -206,7 +206,7 @@
                 background: #0891b2;
             }
 
-            .projects-section {
+            .skills-section {
                 margin-top: 20px;
             }
 
@@ -219,19 +219,13 @@
                 letter-spacing: 0.5px;
             }
 
-            .projects-grid {
+            .skills-grid {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
                 gap: 20px;
             }
 
-            @media (max-width: 768px) {
-                .projects-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            .project-card {
+            .skill-card {
                 background: white;
                 border-radius: 12px;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -239,27 +233,11 @@
                 border: 1px solid #e5e7eb;
             }
 
-            .project-title {
-                font-size: 13px;
+            .skill-name {
+                font-size: 14px;
                 font-weight: 600;
-                color: #6b7280;
-                margin-bottom: 12px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-
-            .progress-item {
-                margin-bottom: 12px;
-            }
-
-            .progress-item:last-child {
-                margin-bottom: 0;
-            }
-
-            .progress-label {
-                font-size: 13px;
                 color: #374151;
-                margin-bottom: 6px;
+                margin-bottom: 10px;
             }
 
             .progress-bar {
@@ -267,6 +245,7 @@
                 background: #e5e7eb;
                 border-radius: 4px;
                 overflow: hidden;
+                margin-bottom: 6px;
             }
 
             .progress-fill {
@@ -274,6 +253,12 @@
                 background: #3b82f6;
                 border-radius: 4px;
                 transition: width 1s ease-out;
+            }
+
+            .skill-percentage {
+                font-size: 12px;
+                color: #6b7280;
+                text-align: right;
             }
 
             .back-link {
@@ -300,6 +285,15 @@
                 font-size: 14px;
                 color: #4b5563;
                 line-height: 1.6;
+            }
+
+            .empty-skills {
+                text-align: center;
+                padding: 40px;
+                color: #9ca3af;
+                background: white;
+                border-radius: 12px;
+                border: 2px dashed #e5e7eb;
             }
         </style>
     </head>
@@ -389,60 +383,33 @@
                 </div>
             </div>
 
-            <!-- Projects Section -->
-            <div class="projects-section">
+            <!-- Skills Section -->
+            <div class="skills-section">
                 <div class="section-title">Skills & Interests</div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-title">Academic Progress</div>
-                        <div class="progress-item">
-                            <div class="progress-label">Core Subjects</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" coreSubjects") %>%">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label">Electives</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" electives") %>%">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label">Projects</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" projects") %>%">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="project-card">
-                        <div class="project-title">Skill Development</div>
-                        <div class="progress-item">
-                            <div class="progress-label">Web Development</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" webDevelopment") %>
-                                    %"></div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label">Problem Solving</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" problemSolving") %>
-                                    %"></div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-label">Teamwork</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: <%= request.getAttribute(" teamwork") %>%">
+                <% String[] skillNames=(String[]) request.getAttribute("skillNames"); String[] skillLevels=(String[])
+                    request.getAttribute("skillLevels"); if (skillNames !=null && skillNames.length> 0) {
+                    %>
+                    <div class="skills-grid">
+                        <% for (int i=0; i < skillNames.length; i++) { %>
+                            <div class="skill-card">
+                                <div class="skill-name">
+                                    <%= skillNames[i] %>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: <%= skillLevels[i] %>%"></div>
+                                </div>
+                                <div class="skill-percentage">
+                                    <%= skillLevels[i] %>%
                                 </div>
                             </div>
-                        </div>
+                            <% } %>
                     </div>
-                </div>
+                    <% } else { %>
+                        <div class="empty-skills">
+                            <p>No skills added yet</p>
+                        </div>
+                        <% } %>
             </div>
 
             <a href="index.jsp" class="back-link">← Back to Form</a>
